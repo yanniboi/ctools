@@ -1,0 +1,8 @@
+type: module
+name: Mini Panles
+description: 'Provides a way to place blocks and contexts in an block.'
+package: Layout
+core: 8.x
+dependencies:
+  - block
+  - ctools
