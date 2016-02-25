@@ -30,12 +30,14 @@ class MiniPanelEditForm extends MiniPanelFormBase {
     $attributes = $this->getAjaxAttributes();
     $add_button_attributes = $this->getAjaxButtonAttributes();
 
+    $form['parameters_section'] = $this->buildParametersForm($add_button_attributes);
+
     $form['variant_section'] = [
       '#type' => 'details',
       '#title' => $this->t('Variants'),
       '#open' => TRUE,
     ];
-    $form['variant_section']['add_new_mini_panel'] = [
+    $form['variant_section']['add_new_variant'] = [
       '#type' => 'link',
       '#title' => $this->t('Add new variant'),
       '#url' => Url::fromRoute('mini_panels.variant_select', [
@@ -166,6 +168,82 @@ class MiniPanelEditForm extends MiniPanelFormBase {
         $form['access_section_section']['access_section'][$access_id] = $row;
       }
     }
+
+    dpm($form);
+
+    return $form;
+  }
+
+  /**
+   * Builds the parameters form for a mini_panels entity.
+   *
+   * @return array
+   */
+  protected function buildParametersForm($add_button_attributes) {
+    $form = [
+      '#type' => 'details',
+      '#title' => $this->t('Parameters'),
+      '#open' => TRUE,
+    ];
+    $form['add_new_parameter'] = [
+      '#type' => 'link',
+      '#title' => $this->t('Add new parameter'),
+      '#url' => Url::fromRoute('entity.mini_panel.parameter_add', [
+        'mini_panel' => $this->entity->id(),
+      ]),
+      '#attributes' => $add_button_attributes,
+      '#attached' => [
+        'library' => [
+          'core/drupal.ajax',
+        ],
+      ],
+    ];
+    $form['parameters'] = [
+      '#type' => 'table',
+      '#header' => [
+        $this->t('Machine name'),
+        $this->t('Label'),
+        $this->t('Type'),
+        $this->t('Operations'),
+      ],
+      '#empty' => $this->t('There are no parameters.'),
+    ];
+    foreach ($this->entity->getParameters() as $parameter) {
+      $row = [];
+      $row['machine_name'] = $parameter['machine_name'];
+      if ($label = $parameter['label']) {
+        $row['label'] = $label;
+      }
+      else {
+        $row['type']['colspan'] = 2;
+      }
+      $row['type']['data'] = $parameter['type'] ?: $this->t('<em>No context assigned</em>');
+
+
+
+      $operations = [];
+      $operations['edit'] = [
+        'title' => $this->t('Edit'),
+        'url' => Url::fromRoute('entity.mini_panel.parameter_edit', [
+          'mini_panel' => $this->entity->id(),
+          'name' => $parameter['machine_name'],
+        ]),
+        'attributes' => $this->getAjaxAttributes(),
+      ];
+      $operations['delete'] = [
+        'title' => $this->t('Delete'),
+        'url' => Url::fromRoute('entity.mini_panel.parameter_delete', [
+          'mini_panel' => $this->entity->id(),
+          'name' => $parameter['machine_name'],
+        ]),
+      ];
+      $row['operations']['data'] = [
+        '#type' => 'operations',
+        '#links' => $operations,
+      ];
+
+      $form['parameters']['#rows'][$parameter['machine_name']] = $row;
+    }
     return $form;
   }
 
@@ -190,7 +268,7 @@ class MiniPanelEditForm extends MiniPanelFormBase {
    * {@inheritdoc}
    */
   protected function copyFormValuesToEntity(EntityInterface $entity, array $form, FormStateInterface $form_state) {
-    $keys_to_ignore = ['variants'];
+    $keys_to_ignore = ['variants', 'parameters'];
     $values_to_restore = [];
     foreach ($keys_to_ignore as $key) {
       $values_to_restore[$key] = $form_state->getValue($key);

@@ -46,6 +46,7 @@ use Drupal\ctools\DisplayVariantInterface;
  *     "label",
  *     "access_logic",
  *     "access_conditions",
+ *     "parameters",
  *   },
  * )
  */
@@ -85,6 +86,19 @@ class MiniPanel extends DisplayBase implements MiniPanelInterface {
    * @var array
    */
   protected $access_conditions = [];
+
+  /**
+   * Parameter context configuration.
+   *
+   * An associative array keyed by parameter name, which contains associative
+   * arrays with the following keys:
+   * - machine_name: Machine-readable context name.
+   * - label: Human-readable context name.
+   * - type: Context type.
+   *
+   * @var array[]
+   */
+  protected $parameters = [];
 
   /**
    * Tracks the logic used to compute access, either 'and' or 'or'.
@@ -188,8 +202,44 @@ class MiniPanel extends DisplayBase implements MiniPanelInterface {
   /**
    * {@inheritdoc}
    */
+  public function getParameters() {
+    return $this->parameters;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getParameter($name) {
+    if (!isset($this->parameters[$name])) {
+      $this->setParameter($name, '');
+    }
+    return $this->parameters[$name];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setParameter($name, $type, $label = '') {
+    $this->parameters[$name] = [
+      'machine_name' => $name,
+      'type' => $type,
+      'label' => $label,
+    ];
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function removeParameter($name) {
+    unset($this->parameters[$name]);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function addContext($name, ContextInterface $value) {
-    //dpm($value, $name);
     $this->contexts[$name] = $value;
   }
 

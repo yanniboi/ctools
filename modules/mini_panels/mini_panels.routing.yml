@@ -83,39 +83,30 @@ entity.mini_panel.access_condition_delete:
 
 #### Parameters
 
-#mini_panels.parameter_edit:
-#  path: '/admin/structure/block/mini-panels/manage/{mini_panel}/parameter/edit/{name}'
-#  defaults:
-#    _form: '\Drupal\mini_panels\Form\ParameterEditForm'
-#    _title_callback: '\Drupal\mini_panels\Controller\PageManagerController::editParameterTitle'
-#  requirements:
-#    _entity_access: mini_panel.update
+entity.mini_panel.parameter_add:
+  path: '/admin/structure/block/mini-panels/manage/{mini_panel}/parameter/add'
+  defaults:
+    _form: '\Drupal\mini_panels\Form\ParameterAddForm'
+    _title: 'Add parameter'
+  requirements:
+    _entity_access: mini_panel.update
 
-#### Static Contexts
+entity.mini_panel.parameter_edit:
+  path: '/admin/structure/block/mini-panels/manage/{mini_panel}/parameter/edit/{name}'
+  defaults:
+    _form: '\Drupal\mini_panels\Form\ParameterEditForm'
+#    _title_callback: '\Drupal\mini_panels\Controller\MiniPanelController::editParameterTitle'
+    _title: 'Edit parameter'
+  requirements:
+    _entity_access: mini_panel.update
 
-#mini_panels.static_context_add:
-#  path: '/admin/structure/block/mini-panels/manage/{mini_panel}/variant/{display_variant}/context/add'
-#  defaults:
-#    _form: '\Drupal\mini_panels\Form\StaticContextAddForm'
-#    _title: 'Add new static context'
-#  requirements:
-#    _entity_access: display_variant.update
-#
-#mini_panels.static_context_edit:
-#  path: '/admin/structure/block/mini-panels/manage/{mini_panel}/variant/{display_variant}/context/edit/{name}'
-#  defaults:
-#    _form: '\Drupal\mini_panels\Form\StaticContextEditForm'
-#    _title_callback: '\Drupal\mini_panels\Controller\PageManagerController::editStaticContextTitle'
-#  requirements:
-#    _entity_access: display_variant.update
-#
-#mini_panels.static_context_delete:
-#  path: '/admin/structure/block/mini-panels/manage/{mini_panel}/variant/{display_variant}/context/delete/{name}'
-#  defaults:
-#    _form: '\Drupal\mini_panels\Form\StaticContextDeleteForm'
-#    _title: 'Delete static context'
-#  requirements:
-#    _entity_access: display_variant.update
+entity.mini_panel.parameter_delete:
+  path: '/admin/structure/block/mini-panels/manage/{mini_panel}/parameter/delete/{name}'
+  defaults:
+    _form: '\Drupal\mini_panels\Form\ParameterDeleteForm'
+    _title: 'Delete parameter'
+  requirements:
+    _entity_access: mini_panel.update
 
 #### Variants
 
