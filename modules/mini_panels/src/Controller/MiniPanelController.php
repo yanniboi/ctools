@@ -93,7 +93,7 @@ class MiniPanelController extends ControllerBase {
    *   The title for the page edit form.
    */
   public function editMiniPanelTitle(MiniPanelInterface $mini_panel) {
-    return $this->t('Edit %label page', ['%label' => $mini_panel->label()]);
+    return $this->t('Edit %label mini panel', ['%label' => $mini_panel->label()]);
   }
 
   /**

@@ -262,7 +262,6 @@ abstract class DisplayBase extends ConfigEntityBase {
    * {@inheritdoc}
    */
   public function addContext($name, ContextInterface $value) {
-    //dpm($value, $name);
     $this->contexts[$name] = $value;
   }
 

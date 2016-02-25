@@ -57,7 +57,7 @@ abstract class MiniPanelFormBase extends EntityForm {
     $form['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
-      '#description' => $this->t('The label for this page.'),
+      '#description' => $this->t('The label for this mini panel.'),
       '#default_value' => $this->entity->label(),
       '#required' => TRUE,
       '#maxlength' => '255',
@@ -86,7 +86,7 @@ abstract class MiniPanelFormBase extends EntityForm {
    *   TRUE if the format exists, FALSE otherwise.
    */
   public function exists($id) {
-    return (bool) $this->entityQuery->get('page')
+    return (bool) $this->entityQuery->get('mini_panel')
       ->condition('id', $id)
       ->execute();
   }

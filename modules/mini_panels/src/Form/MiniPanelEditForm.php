@@ -169,8 +169,6 @@ class MiniPanelEditForm extends MiniPanelFormBase {
       }
     }
 
-    dpm($form);
-
     return $form;
   }
 
