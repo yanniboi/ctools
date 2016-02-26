@@ -23,7 +23,7 @@ class DisplayVariantViewBuilder implements EntityViewBuilderInterface {
    * {@inheritdoc}
    */
   public function view(EntityInterface $entity, $view_mode = 'full', $langcode = NULL) {
-    /** @var \Drupal\ctools\DisplayVariantInterface $entity */
+    /** @var \Drupal\ctools\Entity\DisplayVariantInterface $entity */
     $variant_plugin = $entity->getVariantPlugin();
     if ($variant_plugin instanceof ContextAwareVariantInterface) {
       $variant_plugin->setContexts($entity->getContexts());

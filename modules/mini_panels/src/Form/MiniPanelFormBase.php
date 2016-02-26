@@ -20,7 +20,7 @@ abstract class MiniPanelFormBase extends EntityForm {
   /**
    * {@inheritdoc}
    *
-   * @var \Drupal\mini_panels\MiniPanelInterface
+   * @var \Drupal\ctools\Entity\DisplayInterface
    */
   protected $entity;
 

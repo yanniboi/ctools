@@ -13,7 +13,7 @@ use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Plugin\DefaultSingleLazyPluginCollection;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 
 /**
  * Defines the display variant entity.

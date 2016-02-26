@@ -68,7 +68,7 @@ class DisplayVariantAccess extends EntityAccessControlHandler implements EntityH
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
-    /** @var \Drupal\ctools\DisplayVariantInterface $entity */
+    /** @var \Drupal\ctools\Entity\DisplayVariantInterface $entity */
     if ($operation === 'view') {
       $contexts = $entity->getContexts();
       $conditions = $entity->getSelectionConditions();

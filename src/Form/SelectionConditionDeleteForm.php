@@ -9,7 +9,7 @@ namespace Drupal\ctools\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfirmFormBase;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 
 /**
  * Provides a form for deleting a selection condition.
@@ -19,7 +19,7 @@ class SelectionConditionDeleteForm extends ConfirmFormBase {
   /**
    * The display variant entity this selection condition belongs to.
    *
-   * @var \Drupal\ctools\DisplayVariantInterface
+   * @var \Drupal\ctools\Entity\DisplayVariantInterface
    */
   protected $displayVariant;
 

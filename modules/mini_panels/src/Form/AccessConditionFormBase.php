@@ -8,7 +8,7 @@
 namespace Drupal\mini_panels\Form;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\mini_panels\MiniPanelInterface;
+use Drupal\ctools\Entity\DisplayInterface;
 use Drupal\ctools\Form\ConditionFormBase;
 
 /**
@@ -19,14 +19,14 @@ abstract class AccessConditionFormBase extends ConditionFormBase {
   /**
    * The mini_panel entity this condition belongs to.
    *
-   * @var \Drupal\mini_panels\MiniPanelInterface
+   * @var \Drupal\ctools\Entity\DisplayInterface
    */
   protected $mini_panel;
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, MiniPanelInterface $mini_panel = NULL, $condition_id = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, DisplayInterface $mini_panel = NULL, $condition_id = NULL) {
     $this->mini_panel = $mini_panel;
     return parent::buildForm($form, $form_state, $condition_id, $mini_panel->getContexts());
   }

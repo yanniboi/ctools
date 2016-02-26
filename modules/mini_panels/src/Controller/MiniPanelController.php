@@ -13,9 +13,9 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Plugin\Context\ContextHandlerInterface;
 use Drupal\Core\Url;
 use Drupal\ctools\Form\AjaxFormTrait;
-use Drupal\mini_panels\MiniPanelInterface;
+use Drupal\ctools\Entity\DisplayInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 
 /**
  * Provides route controllers for Page Manager.
@@ -86,20 +86,20 @@ class MiniPanelController extends ControllerBase {
   /**
    * Route title callback.
    *
-   * @param \Drupal\mini_panels\MiniPanelInterface $mini_panel
+   * @param \Drupal\ctools\Entity\DisplayInterface $mini_panel
    *   The page entity.
    *
    * @return string
    *   The title for the page edit form.
    */
-  public function editMiniPanelTitle(MiniPanelInterface $mini_panel) {
+  public function editMiniPanelTitle(DisplayInterface $mini_panel) {
     return $this->t('Edit %label mini panel', ['%label' => $mini_panel->label()]);
   }
 
   /**
    * Route title callback.
    *
-   * @param \Drupal\ctools\DisplayVariantInterface $display_variant
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $display_variant
    *   The page variant entity.
    *
    * @return string
@@ -112,7 +112,7 @@ class MiniPanelController extends ControllerBase {
   /**
    * Route title callback.
    *
-   * @param \Drupal\mini_panels\MiniPanelInterface $mini_panel
+   * @param \Drupal\ctools\Entity\DisplayInterface $mini_panel
    *   The mini_panel entity.
    * @param string $condition_id
    *   The access condition ID.
@@ -120,7 +120,7 @@ class MiniPanelController extends ControllerBase {
    * @return string
    *   The title for the access condition edit form.
    */
-  public function editAccessConditionTitle(MiniPanelInterface $mini_panel, $condition_id) {
+  public function editAccessConditionTitle(DisplayInterface $mini_panel, $condition_id) {
     $access_condition = $mini_panel->getAccessCondition($condition_id);
     return $this->t('Edit %label access condition', ['%label' => $access_condition->getPluginDefinition()['label']]);
   }
@@ -128,7 +128,7 @@ class MiniPanelController extends ControllerBase {
   /**
    * Route title callback.
    *
-   * @param \Drupal\ctools\DisplayVariantInterface $display_variant
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $display_variant
    *   The page variant entity.
    * @param string $condition_id
    *   The selection condition ID.
@@ -144,7 +144,7 @@ class MiniPanelController extends ControllerBase {
   /**
    * Route title callback.
    *
-   * @param \Drupal\ctools\DisplayVariantInterface $display_variant
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $display_variant
    *   The page variant entity.
    * @param string $name
    *   The static context name.
@@ -160,7 +160,7 @@ class MiniPanelController extends ControllerBase {
   /**
    * Route title callback.
    *
-   * @param \Drupal\mini_panels\MiniPanelInterface $mini_panel
+   * @param \Drupal\ctools\Entity\DisplayInterface $mini_panel
    *   The page entity.
    * @param string $name
    *   The parameter context name.
@@ -168,14 +168,14 @@ class MiniPanelController extends ControllerBase {
    * @return string
    *   The title for the parameter edit form.
    */
-  public function editParameterTitle(MiniPanelInterface $mini_panel, $name) {
+  public function editParameterTitle(DisplayInterface $mini_panel, $name) {
     return $this->t('Edit @label parameter', ['@label' => $mini_panel->getParameter($name)['label']]);
   }
 
   /**
    * Enables or disables a Mini panel.
    *
-   * @param \Drupal\mini_panels\MiniPanelInterface $mini_panel
+   * @param \Drupal\ctools\Entity\DisplayInterface $mini_panel
    *   The mini_panel entity.
    * @param string $op
    *   The operation to perform, usually 'enable' or 'disable'.
@@ -183,7 +183,7 @@ class MiniPanelController extends ControllerBase {
    * @return \Symfony\Component\HttpFoundation\RedirectResponse
    *   A redirect back to the mini panels list page.
    */
-  public function performMiniPanelOperation(MiniPanelInterface $mini_panel, $op) {
+  public function performMiniPanelOperation(DisplayInterface $mini_panel, $op) {
     $mini_panel->$op()->save();
 
     if ($op == 'enable') {
@@ -199,13 +199,13 @@ class MiniPanelController extends ControllerBase {
   /**
    * Presents a list of variants to add to the mini_panel entity.
    *
-   * @param \Drupal\mini_panels\MiniPanelInterface $mini_panel
+   * @param \Drupal\ctools\Entity\DisplayInterface $mini_panel
    *   The mini_panel entity.
    *
    * @return array
    *   The variant selection page.
    */
-  public function selectVariant(MiniPanelInterface $mini_panel) {
+  public function selectVariant(DisplayInterface $mini_panel) {
     $build = [
       '#theme' => 'links',
       '#links' => [],
@@ -235,13 +235,13 @@ class MiniPanelController extends ControllerBase {
   /**
    * Presents a list of access conditions to add to the mini_panel entity.
    *
-   * @param \Drupal\mini_panels\MiniPanelInterface $mini_panel
+   * @param \Drupal\ctools\Entity\DisplayInterface $mini_panel
    *   The mini_panel entity.
    *
    * @return array
    *   The access condition selection page.
    */
-  public function selectAccessCondition(MiniPanelInterface $mini_panel) {
+  public function selectAccessCondition(DisplayInterface $mini_panel) {
     $build = [
       '#theme' => 'links',
       '#links' => [],
@@ -263,7 +263,7 @@ class MiniPanelController extends ControllerBase {
   /**
    * Presents a list of selection conditions to add to the page entity.
    *
-   * @param \Drupal\ctools\DisplayVariantInterface $display_variant
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $display_variant
    *   The page variant entity.
    *
    * @return array

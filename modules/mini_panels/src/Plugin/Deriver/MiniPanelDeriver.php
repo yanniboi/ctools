@@ -24,14 +24,11 @@ class MiniPanelDeriver extends DeriverBase {
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
     foreach (MiniPanel::loadMultiple() as $id => $mini_panel) {
+      /** @var \Drupal\ctools\Entity\DisplayInterface $mini_panel */
       $this->derivatives[$id] = $base_plugin_definition;
       $this->derivatives[$id]['admin_label'] = $this->t('Mini Panel (@label)', ['@label' => $mini_panel->label()]);
-      $this->derivatives[$id]['context'] = [
-        'mini_panel' => new ContextDefinition('entity:mini_panel'),
-      ];
-      foreach ($mini_panel->getContexts() as $machine => $context) {
-        // @TODO get contexts from mini
-        //$this->derivatives[$id]['context'][$machine] = new ContextDefinition($context['types'] . ':' . $context['id']);
+      foreach ($mini_panel->getParameters() as $machine => $parameter) {
+        //$this->derivatives[$id]['context'][$machine] = new ContextDefinition($parameter['type']);
       }
     }
     return $this->derivatives;

@@ -10,11 +10,10 @@ namespace Drupal\ctools\Controller;
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Block\BlockManagerInterface;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Plugin\Context\ContextHandlerInterface;
 use Drupal\Core\Url;
 use Drupal\ctools\Form\AjaxFormTrait;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -88,7 +87,7 @@ class DisplayVariantController extends ControllerBase {
   /**
    * Route title callback.
    *
-   * @param \Drupal\ctools\DisplayVariantInterface $display_variant
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $display_variant
    *   The display variant entity.
    *
    * @return string
@@ -101,7 +100,7 @@ class DisplayVariantController extends ControllerBase {
   /**
    * Route title callback.
    *
-   * @param \Drupal\ctools\DisplayVariantInterface $display_variant
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $display_variant
    *   The display variant entity.
    * @param string $condition_id
    *   The selection condition ID.
@@ -117,7 +116,7 @@ class DisplayVariantController extends ControllerBase {
   /**
    * Route title callback.
    *
-   * @param \Drupal\ctools\DisplayVariantInterface $display_variant
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $display_variant
    *   The display variant entity.
    * @param string $name
    *   The static context name.
@@ -133,7 +132,7 @@ class DisplayVariantController extends ControllerBase {
   /**
    * Presents a list of selection conditions to add to the display entity.
    *
-   * @param \Drupal\ctools\DisplayVariantInterface $display_variant
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $display_variant
    *   The display variant entity.
    *
    * @return array
@@ -165,7 +164,7 @@ class DisplayVariantController extends ControllerBase {
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The current request.
-   * @param \Drupal\ctools\DisplayVariantInterface $display_variant
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $display_variant
    *   The display variant entity.
    *
    * @return array

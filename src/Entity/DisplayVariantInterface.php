@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\ctools\DisplayVariantInterface.
+ * Contains Drupal\ctools\Entity\DisplayVariantInterface.
  */
 
-namespace Drupal\ctools;
+namespace Drupal\ctools\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
@@ -32,7 +32,7 @@ interface DisplayVariantInterface extends ConfigEntityInterface, EntityWithPlugi
   /**
    * Gets the entity this variant is on.
    *
-   * @return \Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\ctools\Entity\DisplayInterface
    */
   public function getDisplayEntity();
 

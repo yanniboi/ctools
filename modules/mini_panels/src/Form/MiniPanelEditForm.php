@@ -65,7 +65,7 @@ class MiniPanelEditForm extends MiniPanelFormBase {
         'group' => 'variant-weight',
       ]],
     ];
-    /** @var \Drupal\ctools\DisplayVariantInterface $display_variant */
+    /** @var \Drupal\ctools\Entity\DisplayVariantInterface $display_variant */
     foreach ($this->entity->getVariants() as $display_variant) {
       $row = [
         '#attributes' => [

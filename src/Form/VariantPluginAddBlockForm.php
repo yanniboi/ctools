@@ -9,7 +9,7 @@ namespace Drupal\ctools\Form;
 
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 

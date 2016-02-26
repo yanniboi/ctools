@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\TypedData\PrimitiveInterface;
 use Drupal\Core\TypedData\TypedDataManagerInterface;
-use Drupal\mini_panels\MiniPanelInterface;
+use Drupal\ctools\Entity\DisplayInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -30,7 +30,7 @@ abstract class ParameterFormBase extends FormBase {
   /**
    * The mini_panel entity this static context belongs to.
    *
-   * @var \Drupal\mini_panels\MiniPanelInterface
+   * @var \Drupal\ctools\Entity\DisplayInterface
    */
   protected $mini_panel;
 
@@ -97,7 +97,7 @@ abstract class ParameterFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, MiniPanelInterface $mini_panel = NULL, $name = '') {
+  public function buildForm(array $form, FormStateInterface $form_state, DisplayInterface $mini_panel = NULL, $name = '') {
     $this->mini_panel = $mini_panel;
     $this->parameter = $this->mini_panel->getParameter($name);
 

@@ -9,7 +9,7 @@ namespace Drupal\mini_panels\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfirmFormBase;
-use Drupal\mini_panels\MiniPanelInterface;
+use Drupal\ctools\Entity\DisplayInterface;
 /**
  * Provides a form for deleting an access condition.
  */
@@ -18,7 +18,7 @@ class ParameterDeleteForm extends ConfirmFormBase {
   /**
    * The mini_panel entity this static context belongs to.
    *
-   * @var \Drupal\mini_panels\MiniPanelInterface
+   * @var \Drupal\ctools\Entity\DisplayInterface
    */
   protected $mini_panel;
 
@@ -60,7 +60,7 @@ class ParameterDeleteForm extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, MiniPanelInterface $mini_panel = NULL, $name = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, DisplayInterface $mini_panel = NULL, $name = NULL) {
     $this->mini_panel = $mini_panel;
     $this->parameter = $name;
     return parent::buildForm($form, $form_state);

@@ -9,7 +9,7 @@ namespace Drupal\ctools\Form;
 
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 
 /**
  * Provides a form for deleting an access condition.
@@ -19,7 +19,7 @@ class VariantPluginDeleteBlockForm extends ConfirmFormBase {
   /**
    * The display variant.
    *
-   * @var \Drupal\ctools\DisplayVariantInterface
+   * @var \Drupal\ctools\Entity\DisplayVariantInterface
    */
   protected $displayVariant;
 

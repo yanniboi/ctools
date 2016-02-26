@@ -8,17 +8,15 @@
 namespace Drupal\ctools\Entity;
 
 use Drupal\Component\Plugin\Context\ContextInterface;
-use Drupal\page_manager\Event\PageManagerContextEvent;
-use Drupal\page_manager\Event\PageManagerEvents;
 use Drupal\Core\Condition\ConditionPluginCollection;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 
 /**
  * Defines a base class for Display config entities.
  */
-abstract class DisplayBase extends ConfigEntityBase {
+abstract class DisplayBase extends ConfigEntityBase implements DisplayInterface {
 
   /**
    * The ID of the display entity.
@@ -44,7 +42,7 @@ abstract class DisplayBase extends ConfigEntityBase {
   /**
    * The display variant entities.
    *
-   * @var \Drupal\ctools\DisplayVariantInterface[].
+   * @var \Drupal\ctools\Entity\DisplayVariantInterface[].
    */
   protected $variants;
 
@@ -88,20 +86,6 @@ abstract class DisplayBase extends ConfigEntityBase {
    * @var array[]
    */
   protected $parameters = [];
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getPath() {
-    return $this->path;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function usesAdminTheme() {
-    return isset($this->use_admin_theme) ? $this->use_admin_theme : strpos($this->getPath(), '/admin/') === 0;
-  }
 
   /**
    * {@inheritdoc}
@@ -191,76 +175,6 @@ abstract class DisplayBase extends ConfigEntityBase {
   /**
    * {@inheritdoc}
    */
-  public function getParameters() {
-    return $this->parameters;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getParameter($name) {
-    if (!isset($this->parameters[$name])) {
-      $this->setParameter($name, '');
-    }
-    return $this->parameters[$name];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setParameter($name, $type, $label = '') {
-    $this->parameters[$name] = [
-      'machine_name' => $name,
-      'type' => $type,
-      'label' => $label,
-    ];
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function removeParameter($name) {
-    unset($this->parameters[$name]);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getParameterNames() {
-    if (preg_match_all('|\{(\w+)\}|', $this->getPath(), $matches)) {
-      return $matches[1];
-    }
-    return [];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function preSave(EntityStorageInterface $storage) {
-    parent::preSave($storage);
-
-    $this->filterParameters();
-  }
-
-  /**
-   * Filters the parameters to remove any without a valid type.
-   *
-   * @return $this
-   */
-  protected function filterParameters() {
-    foreach ($this->getParameters() as $name => $parameter) {
-      if (empty($parameter['type'])) {
-        $this->removeParameter($name);
-      }
-    }
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function addContext($name, ContextInterface $value) {
     $this->contexts[$name] = $value;
   }
@@ -269,10 +183,14 @@ abstract class DisplayBase extends ConfigEntityBase {
    * {@inheritdoc}
    */
   public function getContexts() {
-    if (!$this->contexts) {
-      //$this->eventDispatcher()->dispatch(PageManagerEvents::PAGE_CONTEXT, new PageManagerContextEvent($this));
-    }
     return $this->contexts;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setContexts(array $contexts = []) {
+    $this->contexts = $contexts;
   }
 
   /**
@@ -308,7 +226,7 @@ abstract class DisplayBase extends ConfigEntityBase {
   public function getVariants() {
     if (!isset($this->variants)) {
       $this->variants = [];
-      /** @var \Drupal\ctools\DisplayVariantInterface $variant */
+      /** @var \Drupal\ctools\Entity\DisplayVariantInterface $variant */
       foreach ($this->variantStorage()->loadByProperties(['display_entity_id' => $this->id()]) as $variant) {
         $this->variants[$variant->id()] = $variant;
       }
@@ -329,16 +247,6 @@ abstract class DisplayBase extends ConfigEntityBase {
     }
 
     return ($a_weight < $b_weight) ? -1 : 1;
-  }
-
-  /**
-   * Wraps the event dispatcher.
-   *
-   * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface
-   *   The event dispatcher.
-   */
-  protected function eventDispatcher() {
-    return \Drupal::service('event_dispatcher');
   }
 
   /**

@@ -8,7 +8,7 @@
 namespace Drupal\ctools\Form;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 use Drupal\ctools\Form\ConditionFormBase;
 
 /**
@@ -19,7 +19,7 @@ abstract class SelectionConditionFormBase extends ConditionFormBase {
   /**
    * The display variant entity.
    *
-   * @var \Drupal\ctools\DisplayVariantInterface
+   * @var \Drupal\ctools\Entity\DisplayVariantInterface
    */
   protected $displayVariant;
 

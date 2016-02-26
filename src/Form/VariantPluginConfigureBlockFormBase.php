@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContextAwarePluginAssignmentTrait;
 use Drupal\Core\Plugin\ContextAwarePluginInterface;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 
 /**
  * Provides a base form for configuring a block as part of a variant.
@@ -24,7 +24,7 @@ abstract class VariantPluginConfigureBlockFormBase extends FormBase {
   /**
    * The display variant entity.
    *
-   * @var \Drupal\ctools\DisplayVariantInterface
+   * @var \Drupal\ctools\Entity\DisplayVariantInterface
    */
   protected $displayVariant;
 

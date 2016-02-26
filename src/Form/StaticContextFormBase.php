@@ -13,7 +13,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityTypeRepositoryInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -24,7 +24,7 @@ abstract class StaticContextFormBase extends FormBase {
   /**
    * The display variant entity this static context belongs to.
    *
-   * @var \Drupal\ctools\DisplayVariantInterface
+   * @var \Drupal\ctools\Entity\DisplayVariantInterface
    */
   protected $displayVariant;
 

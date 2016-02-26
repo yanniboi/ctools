@@ -54,7 +54,7 @@ class DisplayVariantEditForm extends DisplayVariantFormBase {
       return [];
     }
 
-    /** @var \Drupal\ctools\DisplayVariantInterface $display_variant */
+    /** @var \Drupal\ctools\Entity\DisplayVariantInterface $display_variant */
     $display_variant = $this->getEntity();
 
     // Set up the attributes used by a modal to prevent duplication later.
@@ -216,7 +216,7 @@ class DisplayVariantEditForm extends DisplayVariantFormBase {
     $attributes = $this->getAjaxAttributes();
     $add_button_attributes = $this->getAjaxButtonAttributes();
 
-    /** @var \Drupal\ctools\DisplayVariantInterface $display_variant */
+    /** @var \Drupal\ctools\Entity\DisplayVariantInterface $display_variant */
     $display_variant = $this->getEntity();
 
     // Selection conditions.
@@ -301,7 +301,7 @@ class DisplayVariantEditForm extends DisplayVariantFormBase {
    * @return array
    */
   protected function buildContextForm() {
-    /** @var \Drupal\ctools\DisplayVariantInterface $display_variant */
+    /** @var \Drupal\ctools\Entity\DisplayVariantInterface $display_variant */
     $display_variant = $this->getEntity();
 
     // Set up the attributes used by a modal to prevent duplication later.
@@ -400,7 +400,7 @@ class DisplayVariantEditForm extends DisplayVariantFormBase {
 
     parent::save($form, $form_state);
 
-    /** @var \Drupal\ctools\DisplayVariantInterface $display_variant */
+    /** @var \Drupal\ctools\Entity\DisplayVariantInterface $display_variant */
     $display_variant = $this->getEntity();
     $display_entity = $this->entityTypeManager->getStorage($display_variant->get('display_entity_type'))->load($display_variant->get('display_entity_id'));
     $url = $display_entity->toUrl('edit-form');

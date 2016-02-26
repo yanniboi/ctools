@@ -8,7 +8,7 @@
 namespace Drupal\mini_panels\Form;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\mini_panels\MiniPanelInterface;
+use Drupal\ctools\Entity\DisplayInterface;
 
 /**
  * Provides a form for editing a parameter.
@@ -39,7 +39,7 @@ class ParameterEditForm extends ParameterFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, MiniPanelInterface $mini_panel = NULL, $name = '') {
+  public function buildForm(array $form, FormStateInterface $form_state, DisplayInterface $mini_panel = NULL, $name = '') {
     $form = parent::buildForm($form, $form_state, $mini_panel, $name);
     // The machine name of an existing context is read-only.
     $form['machine_name'] = array(

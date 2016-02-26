@@ -10,7 +10,6 @@ namespace Drupal\mini_panels\Entity;
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Url;
-use Drupal\mini_panels\MiniPanelInterface;
 
 /**
  * Provides a list builder for page entities.
@@ -30,7 +29,7 @@ class MiniPanelsListBuilder extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /** @var \Drupal\mini_panels\MiniPanelInterface $entity */
+    /** @var \Drupal\ctools\Entity\DisplayInterface $entity */
     $row['label'] = $entity->label();
     $row['id'] = $entity->id();
 

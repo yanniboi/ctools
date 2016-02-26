@@ -2,34 +2,34 @@
 
 /**
  * @file
- * Contains \Drupal\mini_panels\MiniPanelInterface.
+ * Contains \Drupal\ctools\Entity\DisplayInterface.
  */
 
-namespace Drupal\mini_panels;
+namespace Drupal\ctools\Entity;
 
 use Drupal\Component\Plugin\Context\ContextInterface;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 
 /**
- * Provides an interface for mini_panel entities.
+ * Provides an interface for page entities.
  */
-interface MiniPanelInterface extends ConfigEntityInterface, EntityWithPluginCollectionInterface {
+interface DisplayInterface extends ConfigEntityInterface, EntityWithPluginCollectionInterface {
 
   /**
-   * Returns whether the mini_panel entity is enabled.
+   * Returns whether the page entity is enabled.
    *
    * @return bool
-   *   Whether the mini_panel entity is enabled or not.
+   *   Whether the page entity is enabled or not.
    */
   public function status();
 
   /**
-   * Adds a variant to this mini_panel.
+   * Adds a variant to this page.
    *
-   * @param \Drupal\ctools\DisplayVariantInterface $variant
-   *   A display variant entity.
+   * @param \Drupal\ctools\Entity\DisplayVariantInterface $variant
+   *   A page variant entity.
    *
    * @return $this
    */
@@ -41,7 +41,7 @@ interface MiniPanelInterface extends ConfigEntityInterface, EntityWithPluginColl
    * @param string $variant_id
    *   The variant ID.
    *
-   * @return \Drupal\ctools\DisplayVariantInterface
+   * @return \Drupal\page_manager\PageVariantInterface
    *   The variant object.
    */
   public function getVariant($variant_id);
@@ -59,13 +59,13 @@ interface MiniPanelInterface extends ConfigEntityInterface, EntityWithPluginColl
   /**
    * Returns the variants available for the entity.
    *
-   * @return \Drupal\ctools\DisplayVariantInterface[]
+   * @return \Drupal\ctools\Entity\DisplayVariantInterface[]
    *   An array of the variants.
    */
   public function getVariants();
 
   /**
-   * Returns the conditions used for determining access for this mini_panel entity.
+   * Returns the conditions used for determining access for this page entity.
    *
    * @return \Drupal\Core\Condition\ConditionInterface[]|\Drupal\Core\Condition\ConditionPluginCollection
    *   An array of configured condition plugins.
@@ -73,7 +73,7 @@ interface MiniPanelInterface extends ConfigEntityInterface, EntityWithPluginColl
   public function getAccessConditions();
 
   /**
-   * Adds a new access condition to the mini_panel entity.
+   * Adds a new access condition to the page entity.
    *
    * @param array $configuration
    *   An array of configuration for the new access condition.
@@ -156,19 +156,21 @@ interface MiniPanelInterface extends ConfigEntityInterface, EntityWithPluginColl
   public function removeParameter($name);
 
   /**
-   * Gets the names of all parameters for this page.
-   *
-   * @return string[]
-   */
-  public function getParameterNames();
-
-  /**
    * Gets the values for all defined contexts.
    *
    * @return \Drupal\Core\Plugin\Context\ContextInterface[]
    *   An array of set context values, keyed by context name.
    */
   public function getContexts();
+
+  /**
+   * Sets the values for all defined contexts.
+   *
+   * @param \Drupal\Component\Plugin\Context\ContextInterface[] $contexts
+   *   An array of set context values, keyed by context name.
+   */
+  public function setContexts(array $contexts);
+
 
   /**
    * Sets the context for a given name.

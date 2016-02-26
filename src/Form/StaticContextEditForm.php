@@ -8,7 +8,7 @@
 namespace Drupal\ctools\Form;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\ctools\DisplayVariantInterface;
+use Drupal\ctools\Entity\DisplayVariantInterface;
 
 /**
  * Provides a form for adding a new static context.

@@ -21,7 +21,7 @@ abstract class DisplayVariantFormBase extends EntityForm {
   /**
    * The entity being used by this form.
    *
-   * @var \Drupal\ctools\DisplayVariantInterface
+   * @var \Drupal\ctools\Entity\DisplayVariantInterface
    */
   protected $entity;
 
