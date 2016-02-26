@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_block_view_alter().
+ *
+ * Add contextual links to edit mini panels.
+ */
+function mini_panels_block_view_alter(&$build, $block) {
+  if ($block->getBaseId() == 'mini_panel') {
+    $build['#contextual_links']['mini_panel'] = [
+      'route_parameters' => ['mini_panel' => $block->getDerivativeId()],
+    ];
+  }
+
+}
