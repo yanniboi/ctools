@@ -97,18 +97,23 @@ class MiniPanel extends BlockBase implements ContextAwarePluginInterface, Contai
    * {@inheritdoc}
    */
   public function build() {
-    /** @var $entity \Drupal\mini_panels\Entity\MiniPanel */
-    $entity = $this->getContextValue('mini_panel');
+    $mini_panel_id = array_pop(explode(':', $this->pluginId));
 
-    $variants = $entity->getVariants();
+    /** @var $mini_panel \Drupal\ctools\Entity\DisplayInterface */
+    $mini_panel = $this->entityManager->getStorage('mini_panel')->load($mini_panel_id);
+    $mini_panel->setContexts($this->getContexts());
+
+    $variants = $mini_panel->getVariants();
     $variants = $this->filterDisplayVariants($variants);
     $variant = reset($variants);
+
+    //return ['#markup' => 'test'];
 
     $view_builder = $this->entityManager->getViewBuilder($variant->getEntityTypeId());
     $build = $view_builder->view($variant);
 
-    CacheableMetadata::createFromObject($this->getContext('mini_panel'))
-      ->applyTo($build);
+//    CacheableMetadata::createFromObject($this->getContext('mini_panel'))
+//      ->applyTo($build);
 
     return $build;
   }

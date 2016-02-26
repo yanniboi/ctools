@@ -37,6 +37,16 @@ interface DisplayVariantInterface extends ConfigEntityInterface, EntityWithPlugi
   public function getDisplayEntity();
 
   /**
+   * Sets the entity this variant is on.
+   *
+   * @param \Drupal\ctools\Entity\DisplayInterface $display_entity
+   *   The weight of the variant.
+   *
+   * @return $this
+   */
+  public function setDisplayEntity(DisplayInterface $display_entity);
+
+  /**
    * Gets the values for all defined contexts.
    *
    * @return \Drupal\Core\Plugin\Context\ContextInterface[]

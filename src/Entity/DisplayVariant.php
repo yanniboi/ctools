@@ -117,6 +117,13 @@ class DisplayVariant extends ConfigEntityBase implements DisplayVariantInterface
   protected $display_entity_id;
 
   /**
+   * The display entity this variant is for.
+   *
+   * @var \Drupal\ctools\Entity\DisplayInterface
+   */
+  protected $displayEntity;
+
+  /**
    * The plugin configuration for the selection criteria condition plugins.
    *
    * @var array
@@ -252,10 +259,21 @@ class DisplayVariant extends ConfigEntityBase implements DisplayVariantInterface
    * {@inheritdoc}
    */
   public function getDisplayEntity() {
-    if (!$this->display_entity_type || !$this->display_entity_id) {
-      throw new \UnexpectedValueException('The display variant has no associated entity');
+    if (!isset($this->displayEntity)) {
+      if (!$this->display_entity_type || !$this->display_entity_id) {
+        throw new \UnexpectedValueException('The display variant has no associated entity');
+      }
+      $this->displayEntity = $this->getDisplayEntityStorage()->load($this->display_entity_id);
     }
-    return $this->getDisplayEntityStorage()->load($this->display_entity_id);
+    return $this->displayEntity;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setDisplayEntity(DisplayInterface $display_entity) {
+    $this->displayEntity = $display_entity;
+    return $this;
   }
 
   /**

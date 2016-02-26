@@ -228,7 +228,8 @@ abstract class DisplayBase extends ConfigEntityBase implements DisplayInterface 
       $this->variants = [];
       /** @var \Drupal\ctools\Entity\DisplayVariantInterface $variant */
       foreach ($this->variantStorage()->loadByProperties(['display_entity_id' => $this->id()]) as $variant) {
-        $this->variants[$variant->id()] = $variant;
+        // Set the display entity on the loaded variants.
+        $this->variants[$variant->id()] = $variant->setDisplayEntity($this);
       }
       // Suppress errors because of https://bugs.php.net/bug.php?id=50688.
       @uasort($this->variants, [$this, 'variantSortHelper']);

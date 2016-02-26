@@ -27,8 +27,8 @@ class MiniPanelDeriver extends DeriverBase {
       /** @var \Drupal\ctools\Entity\DisplayInterface $mini_panel */
       $this->derivatives[$id] = $base_plugin_definition;
       $this->derivatives[$id]['admin_label'] = $this->t('Mini Panel (@label)', ['@label' => $mini_panel->label()]);
-      foreach ($mini_panel->getParameters() as $machine => $parameter) {
-        //$this->derivatives[$id]['context'][$machine] = new ContextDefinition($parameter['type']);
+      foreach ($mini_panel->getParameters() as $parameter) {
+        $this->derivatives[$id]['context'][$parameter['machine_name']] = new ContextDefinition($parameter['type'], $parameter['label'], TRUE);
       }
     }
     return $this->derivatives;

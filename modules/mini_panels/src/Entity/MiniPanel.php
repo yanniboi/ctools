@@ -8,6 +8,9 @@
 namespace Drupal\mini_panels\Entity;
 
 use Drupal\ctools\Entity\DisplayBase;
+use Drupal\Component\Plugin\Context\ContextInterface;
+use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\Plugin\Context\Context;
 
 /**
  * Defines a Mini Panel entity class.
@@ -80,5 +83,26 @@ class MiniPanel extends DisplayBase {
   public function removeParameter($name) {
     unset($this->parameters[$name]);
     return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function addContext($name, ContextInterface $value) {
+    $this->contexts[$name] = $value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getContexts() {
+    return $this->contexts;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setContexts(array $contexts = []) {
+    $this->contexts = $contexts;
   }
 }
