@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains \Drupal\mini_panels\Form\MiniPanelFormBase.
+ * Contains \Drupal\ctools\Form\DisplayFormBase.
  */
 
-namespace Drupal\mini_panels\Form;
+namespace Drupal\ctools\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Entity\Query\QueryFactory;
@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides a base form for editing and adding a page entity.
  */
-abstract class MiniPanelFormBase extends EntityForm {
+abstract class DisplayFormBase extends EntityForm {
 
   /**
    * {@inheritdoc}
@@ -57,7 +57,7 @@ abstract class MiniPanelFormBase extends EntityForm {
     $form['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
-      '#description' => $this->t('The label for this mini panel.'),
+      '#description' => $this->t(''),
       '#default_value' => $this->entity->label(),
       '#required' => TRUE,
       '#maxlength' => '255',
@@ -86,7 +86,7 @@ abstract class MiniPanelFormBase extends EntityForm {
    *   TRUE if the format exists, FALSE otherwise.
    */
   public function exists($id) {
-    return (bool) $this->entityQuery->get('mini_panel')
+    return (bool) $this->entityQuery->get($this->entity->getEntityTypeId())
       ->condition('id', $id)
       ->execute();
   }
